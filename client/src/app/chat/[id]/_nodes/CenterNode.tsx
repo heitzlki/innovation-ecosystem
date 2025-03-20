@@ -41,7 +41,7 @@ function CenterNode({ data }: { data: { color: string; title: string } }) {
       {/* <Handle type='target' position={Position.Top} className='w-16' />
       <Handle type='source' position={Position.Bottom} className='w-16 ' /> */}
       {/* <BorderBeam duration={8} size={20} /> */}
-      <BorderBeam duration={3} size={40} colorFrom={color1} colorTo={color2} />
+      <BorderBeam duration={3} size={50} colorFrom={color1} colorTo={color2} />
     </div>
   );
 }

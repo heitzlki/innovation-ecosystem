@@ -68,6 +68,7 @@ import InfoNode from './_nodes/InfoNode';
 
 import FloatingEdge from './_edges/FloatingEdge';
 import CenterNode from './_nodes/CenterNode';
+import { useStore } from '@/lib/store';
 
 const nodeTypes = {
   annotation: AnnotationNode,
@@ -80,27 +81,10 @@ const edgeTypes = {
   // button: ButtonEdge,
 };
 
-export default function Graph({ startData }: GraphProps) {
-  console.log('startData:', startData[0].area.contacts[0]);
-
-  // if (startData.length !== 0) {
-  //   if (startData[0]?.contacts?.length !== 0) {
-  //     console.log('startData[0].contacts:', startData[0].contacts);
-  //   }
-  // }
-
-  // for (const area of startData) {
-  //   console.log('area:', area);
-  //   if (area.contacts.length === 0) {
-  //     console.log('No contacts for:', area.name);
-  //   }
-  //   for (const contact of area.contacts) {
-  //     console.log('contact:', contact);
-  //   }
-  // }
-
+export default function Graph() {
+  const { graphData } = useStore();
   const { nodes: initialNodes, edges: initialEdges } =
-    useEdgeParams().initialElements(3, 250, startData);
+    useEdgeParams().initialElements(3, 260, graphData);
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);

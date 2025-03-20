@@ -116,8 +116,8 @@ export default function Start() {
     const lightness2 = (value3 / 100) * 50 + 25; // Map to 25-75 for better contrast
 
     // Generate HSL color strings
-    const color1 = `hsl(${hue1}, ${saturation1}%, ${lightness1}%)`;
-    const color2 = `hsl(${hue2}, ${saturation2}%, ${lightness2}%)`;
+    const color1 = `hsl(${hue1},${saturation1}%,${lightness1}%)`;
+    const color2 = `hsl(${hue2},${saturation2}%,${lightness2}%)`;
 
     // Set colors
     setColor1(color1);
@@ -144,7 +144,7 @@ export default function Start() {
 
       // Construct URL with query parameters
       const url = new URL('http://127.0.0.1:8000/init', window.location.origin);
-      
+
       // Add all form data as query parameters
       url.searchParams.append('role', data.role);
       url.searchParams.append('problem', data.problem);
@@ -163,11 +163,11 @@ export default function Start() {
 
       // Parse response data
       const responseData = await response.json();
-      
+
       // Add the slider data to the response before storing
       const fullData = {
         ...responseData,
-        ...sliderData
+        ...sliderData,
       };
 
       // Store response data in localStorage to access it on the next page

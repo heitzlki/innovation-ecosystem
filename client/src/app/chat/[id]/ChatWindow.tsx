@@ -36,14 +36,10 @@ import { Check, Plus, Send } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { CardContent, CardHeader, CardFooter } from '@/components/ui/card';
 
-interface ChatWindowProps {
-  startData?: any;
-}
-
-export default function CardsChat({ startData }: ChatWindowProps) {
+export default function CardsChat() {
   const [open, setOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
-  const { color1, color2 } = useStore();
+  const { color1, color2, graphData } = useStore();
 
   // Initialize messages based on startData if available
   const [messages, setMessages] = React.useState(() => {
@@ -56,7 +52,7 @@ export default function CardsChat({ startData }: ChatWindowProps) {
     ];
 
     // If we have startData, add a welcome message referencing all the submitted data
-    if (startData) {
+    if (graphData) {
       // Format a message that includes slider data if available
       const welcomeMessage = `Welcome, I'm your personal Innovation Assistant. In the middle you can see possible areas of inovation relate
       to your problems. Feel free to explore the graph. Once your ready, we can get started developing a roadmap towards more innovation.`;
@@ -157,7 +153,7 @@ export default function CardsChat({ startData }: ChatWindowProps) {
                   },
                   body: JSON.stringify({
                     last_messages: all_messages,
-                    start_data: startData,
+                    start_data: graphData,
                   }),
                 });
 
@@ -220,14 +216,14 @@ export default function CardsChat({ startData }: ChatWindowProps) {
         <BorderBeam
           duration={6}
           size={400}
-          // className={`from-transparent via-[${color1}] to-transparent`}
           className={`from-transparent via-[color:${color1}] to-transparent`}
+          // className={`from-transparent via-[color:hsl(186,100%,50%)] to-transparent`}
         />
         <BorderBeam
           duration={6}
           delay={3}
           size={400}
-          className={`from-transparent via-[${color2}] to-transparent`}
+          className={`from-transparent via-[color:${color2}] to-transparent`}
         />
       </Card>
     </div>

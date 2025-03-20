@@ -39,9 +39,9 @@ interface InitialElements {
 import { Area } from '@/types';
 
 const colors = [
-  'hsla(299, 100%, 76%, 0.4)',
-  'hsla(137, 100%, 77%, 0.4)',
-  'hsla(194, 100%, 50%, 0.4)',
+  'hsla(299,100%,76%,0.4)',
+  'hsla(137,100%,77%,0.4)',
+  'hsla(194,100%,50%,0.4)',
 ];
 
 /**
