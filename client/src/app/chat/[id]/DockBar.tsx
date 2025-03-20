@@ -29,9 +29,9 @@ const Icons = {};
 
 const DATA = {
   navbar: [
-    { href: '#', icon: HomeIcon, label: 'Home' },
-    { href: '#', icon: PencilIcon, label: 'New' },
-    { href: '#', icon: UserIcon, label: 'Settings' },
+    { href: '/', icon: HomeIcon, label: 'Home' },
+    { href: '/start', icon: PencilIcon, label: 'New' },
+    { href: '/settings', icon: UserIcon, label: 'Settings' },
   ],
 };
 
@@ -40,7 +40,7 @@ export default function DockBar() {
     <div className='fixed w-full top-0 z-50 px-4 py-4'>
       <div className='flex flex-col items-center justify-center'>
         <TooltipProvider>
-          <Dock direction='middle' className='mt-0'>
+          <Dock direction='middle' className='mt-0 bg-card'>
             {DATA.navbar.map((item) => (
               <DockIcon key={item.label}>
                 <Tooltip>
