@@ -130,16 +130,41 @@ export default function Start() {
     console.log(color1, color2);
   };
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
-    setSubmitted(true);
-    router.push('/chat/ey38he3udh3iuye29w');
-    toast('You submitted the following values:', {
-      description: (
-        <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
-          <code className='text-white'>{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
+  const [isLoading, setIsLoading] = useState(false);
+
+  async function onSubmit(data: z.infer<typeof formSchema>) {
+    try {
+      setSubmitted(true);
+      setIsLoading(true);
+
+      // Construct URL with query parameters
+      const url = new URL('http://127.0.0.1:8000/init', window.location.origin);
+      url.searchParams.append('role', data.role);
+      url.searchParams.append('problem', data.problem);
+
+      // Make GET request to server
+      const response = await fetch(url.toString());
+
+      if (!response.ok) {
+        throw new Error('Server response was not ok');
+      }
+
+      // Parse response data
+      const responseData = await response.json();
+
+      // Store response data in localStorage to access it on the next page
+      localStorage.setItem('startData', JSON.stringify(responseData));
+
+      // Navigate to next page
+      router.push('/chat/ey38he3udh3iuye29w');
+    } catch (error) {
+      console.error('Error:', error);
+      toast('Error submitting your data', {
+        description: 'Please try again later.',
+      });
+    } finally {
+      setIsLoading(false);
+    }
   }
   const [mounted, setMounted] = useState(false);
 
@@ -307,8 +332,8 @@ export default function Start() {
                     </FormItem>
                   )}
                 /> */}
-                <Button className={'w-full'} type='submit'>
-                  Submit
+                <Button className={'w-full'} type='submit' disabled={isLoading}>
+                  {isLoading ? 'Loading...' : 'Submit'}
                 </Button>
 
                 {/* <RainbowButton type='submit'>Submit</RainbowButton> */}
