@@ -79,7 +79,12 @@ const edgeTypes = {
   // button: ButtonEdge,
 };
 
-export default function Graph() {
+interface GraphProps {
+  startData?: any;
+}
+
+export default function Graph({ startData }: GraphProps) {
+  console.log('startData:', startData);
   const { nodes: initialNodes, edges: initialEdges } =
     useEdgeParams().initialElements(3, 250);
 
