@@ -6,9 +6,12 @@ import ChatWindow from './ChatWindow';
 import Graph from './Graph';
 import Roadmap from './Roadmap';
 
+import { useStore } from '@/lib/store';
+
 export default function Chat({ params }: { params: Promise<{ id: string }> }) {
   const [startData, setStartData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { setGraphData } = useStore();
 
   useEffect(() => {
     // Retrieve data from localStorage
@@ -18,6 +21,7 @@ export default function Chat({ params }: { params: Promise<{ id: string }> }) {
       try {
         const parsedData = JSON.parse(storedData);
         setStartData(parsedData);
+        setGraphData(parsedData);
       } catch (error) {
         console.error('Error parsing stored data:', error);
       }
