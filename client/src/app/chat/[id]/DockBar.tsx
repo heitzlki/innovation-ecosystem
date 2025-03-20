@@ -1,9 +1,12 @@
 'use client';
 
+import { useStore } from '@/lib/store';
+
 import {
   CalendarIcon,
   HomeIcon,
   MailIcon,
+  MapPlusIcon,
   PencilIcon,
   User,
   UserIcon,
@@ -22,10 +25,9 @@ import {
 } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 import { Dock, DockIcon } from '@/components/magicui/dock';
+import { Button } from '@/components/ui/button';
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
-
-const Icons = {};
 
 const DATA = {
   navbar: [
@@ -36,6 +38,8 @@ const DATA = {
 };
 
 export default function DockBar() {
+  const { roadmap, setRoadmap } = useStore();
+
   return (
     <div className='fixed w-full top-0 z-50 px-4 py-8'>
       <div className='flex flex-col items-center justify-center'>
@@ -61,6 +65,19 @@ export default function DockBar() {
                 </Tooltip>
               </DockIcon>
             ))}
+            <DockIcon>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant='ghost' size='icon' onClick={setRoadmap}>
+                    <MapPlusIcon className='size-4' />
+                    <span className='sr-only'>Roadmap</span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Roadmap</p>
+                </TooltipContent>
+              </Tooltip>
+            </DockIcon>
             {/* <Separator orientation='vertical' className='h-full' /> */}
 
             {/* <Separator orientation='vertical' className='h-full py-2' />` */}

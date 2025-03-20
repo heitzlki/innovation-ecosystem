@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
+import { BorderBeam } from '@/components/magicui/border-beam';
 
 import { ModeToggle } from '@/components/mode-toggle';
 import { buttonVariants } from '@/components/ui/button';
@@ -29,6 +30,7 @@ import { Label } from '@/components/ui/label';
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
+import { useStore } from '@/lib/store';
 import { Check, Plus, Send } from 'lucide-react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -36,17 +38,21 @@ import { CardContent, CardHeader, CardFooter } from '@/components/ui/card';
 
 export default function CardsChat() {
   const [open, setOpen] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const { color1, color2 } = useStore();
 
-  const [messages, setMessages] = React.useState([
-    {
-      role: 'agent',
-      content: 'Hi, how can I help you today?',
-    },
-    {
-      role: 'user',
-      content: "Hey, I'm having trouble with my sales report.",
-    },
-  ]);
+  // Initialize messages based on startData if available
+  const [messages, setMessages] = React.useState(() => {
+    // Default messages if no startData is available
+    const defaultMessages = [
+      {
+        role: 'agent',
+        content: 'Hi, how can I help you today?',
+      }
+    ];
+    
+    return defaultMessages;
+  });
   const [input, setInput] = React.useState('');
   const inputLength = input.trim().length;
   // <div className='fixed top-1/2 right-0 transform -translate-y-1/2 z-50 px-4 py-4'>
@@ -57,7 +63,7 @@ export default function CardsChat() {
   // </div>
   return (
     <div className='fixed top-1/2 right-0 transform -translate-y-1/2 z-50 px-4 py-12'>
-      <Card>
+      <Card className='relative w-[350px] overflow-hidden'>
         {/* <CardHeader className='flex flex-row items-center'>
           <div className='flex items-center space-x-4'>
             <Avatar>
@@ -103,17 +109,66 @@ export default function CardsChat() {
         </CardContent>
         <CardFooter>
           <form
-            onSubmit={(event) => {
+            onSubmit={async (event) => {
               event.preventDefault();
               if (inputLength === 0) return;
-              setMessages([
-                ...messages,
-                {
-                  role: 'user',
-                  content: input,
-                },
-              ]);
+              
+              // Add user message to the UI immediately
+              const userMessage = {
+                role: 'user',
+                content: input,
+              };
+              
+              const all_messages = [...messages, userMessage]
+              setMessages(all_messages);
+              console.log(all_messages)
+              const userInput = input;
               setInput('');
+              setIsLoading(true);
+              
+              try {
+                // Call the message endpoint
+                const url = new URL('http://127.0.0.1:8000/message', window.location.origin);
+                const response = await fetch(url, {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({
+                    last_messages: all_messages,
+                  }),
+                });
+                
+                if (!response.ok) {
+                  throw new Error('Failed to get response');
+                }
+                
+                // Get the response message
+                const data = await response.json();
+
+                console.log('data:', data);
+                
+                // Add the response message to the UI
+                setMessages(prevMessages => [
+                  ...prevMessages,
+                  {
+                    role: 'agent',
+                    content: data.response || "I'm sorry, I couldn't process your request.",
+                  },
+                ]);
+              } catch (error) {
+                console.error('Error fetching message response:', error);
+                // Add an error message
+                setMessages(prevMessages => [
+                  ...prevMessages,
+                  {
+                    role: 'agent',
+                    content: "I'm sorry, there was an error processing your request. Please try again.",
+                  },
+                ]);
+              } finally {
+                setIsLoading(false);
+              }
             }}
             className='flex w-full items-center space-x-2'>
             <Input
@@ -124,12 +179,32 @@ export default function CardsChat() {
               value={input}
               onChange={(event) => setInput(event.target.value)}
             />
-            <Button type='submit' size='icon' disabled={inputLength === 0}>
-              <Send />
-              <span className='sr-only'>Send</span>
+            <Button 
+              type='submit' 
+              size='icon' 
+              disabled={inputLength === 0 || isLoading}
+            >
+              {isLoading ? (
+                <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+              ) : (
+                <Send />
+              )}
+              <span className='sr-only'>{isLoading ? 'Loading' : 'Send'}</span>
             </Button>
           </form>
         </CardFooter>
+        <BorderBeam
+          duration={6}
+          size={400}
+          // className={`from-transparent via-[${color1}] to-transparent`}
+          className={`from-transparent via-[hsl(0, 100%, 50%)] to-transparent`}
+        />
+        <BorderBeam
+          duration={6}
+          delay={3}
+          size={400}
+          className={`from-transparent via-[${color2}] to-transparent`}
+        />
       </Card>
     </div>
   );
