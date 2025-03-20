@@ -36,7 +36,11 @@ import { Check, Plus, Send } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { CardContent, CardHeader, CardFooter } from '@/components/ui/card';
 
-export default function CardsChat(startData: any) {
+interface ChatWindowProps {
+  startData?: any;
+}
+
+export default function CardsChat({ startData }: ChatWindowProps) {
   const [open, setOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const { color1, color2 } = useStore();
@@ -44,13 +48,26 @@ export default function CardsChat(startData: any) {
   // Initialize messages based on startData if available
   const [messages, setMessages] = React.useState(() => {
     // Default messages if no startData is available
-    // TODO: Change first message
     const defaultMessages = [
       {
         role: 'assistant',
         content: 'Hi, how can I help you today?',
       }
     ];
+    
+    // If we have startData, add a welcome message referencing all the submitted data
+    if (startData) {
+      // Format a message that includes slider data if available
+      const welcomeMessage = `Welcome, I'm your personal Innovation Assistant. In the middle you can see possible areas of inovation relate
+      to your problems. Feel free to explore the graph. Once your ready, we can get started developing a roadmap towards more innovation.`;
+      
+      return [
+        {
+          role: 'assistant',
+          content: welcomeMessage,
+        }
+      ];
+    }
     
     return defaultMessages;
   });
@@ -64,7 +81,7 @@ export default function CardsChat(startData: any) {
   // </div>
   return (
     <div className='fixed top-1/2 right-0 transform -translate-y-1/2 z-50 px-4 py-12'>
-      <Card className='relative w-[350px] overflow-hidden'>
+      <Card className='relative w-[500px] overflow-hidden'>
         {/* <CardHeader className='flex flex-row items-center'>
           <div className='flex items-center space-x-4'>
             <Avatar>

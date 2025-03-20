@@ -133,10 +133,26 @@ export default function Start() {
       setSubmitted(true);
       setIsLoading(true);
 
+      // Convert form data to match slider values
+      const sliderData = {
+        ...data,
+        // Map form values to corresponding colorSlider values (0-100 scale)
+        clue: colorSlider[0],
+        motivation: colorSlider[1],
+        confidence: colorSlider[2],
+      };
+
       // Construct URL with query parameters
       const url = new URL('http://127.0.0.1:8000/init', window.location.origin);
+      
+      // Add all form data as query parameters
       url.searchParams.append('role', data.role);
       url.searchParams.append('problem', data.problem);
+      url.searchParams.append('clue', colorSlider[0].toString());
+      url.searchParams.append('motivation', colorSlider[1].toString());
+      url.searchParams.append('confidence', colorSlider[2].toString());
+
+      console.log('Submitting data:', sliderData);
 
       // Make GET request to server
       const response = await fetch(url.toString());
@@ -147,9 +163,15 @@ export default function Start() {
 
       // Parse response data
       const responseData = await response.json();
+      
+      // Add the slider data to the response before storing
+      const fullData = {
+        ...responseData,
+        ...sliderData
+      };
 
       // Store response data in localStorage to access it on the next page
-      localStorage.setItem('startData', JSON.stringify(responseData));
+      localStorage.setItem('startData', JSON.stringify(fullData));
 
       // Navigate to next page
       router.push('/chat/ey38he3udh3iuye29w');
@@ -231,7 +253,7 @@ export default function Start() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        How much do you know about your problem?
+                        How confident are you in knowing what your problems are?
                       </FormLabel>
                       <FormControl>
                         {/* <Slider defaultValue={[33]} max={100} step={1} /> */}
@@ -287,7 +309,7 @@ export default function Start() {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>
-                        How confident do you feel with the current situation?{' '}
+                        How confident do you feel about your current situation?{' '}
                       </FormLabel>
                       <FormControl>
                         <DualRangeSlider
