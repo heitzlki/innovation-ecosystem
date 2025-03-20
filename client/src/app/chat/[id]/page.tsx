@@ -37,7 +37,7 @@ export default function Chat({ params }: { params: Promise<{ id: string }> }) {
   return (
     <div suppressHydrationWarning>
       <DockBar />
-      <ChatWindow />
+      <ChatWindow startData={startData} />
       <Graph startData={startData} />
       <Roadmap />
     </div>

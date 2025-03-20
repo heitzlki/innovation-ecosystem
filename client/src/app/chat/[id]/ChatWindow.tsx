@@ -36,7 +36,7 @@ import { Check, Plus, Send } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { CardContent, CardHeader, CardFooter } from '@/components/ui/card';
 
-export default function CardsChat() {
+export default function CardsChat(startData: any) {
   const [open, setOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const { color1, color2 } = useStore();
@@ -44,9 +44,10 @@ export default function CardsChat() {
   // Initialize messages based on startData if available
   const [messages, setMessages] = React.useState(() => {
     // Default messages if no startData is available
+    // TODO: Change first message
     const defaultMessages = [
       {
-        role: 'agent',
+        role: 'assistant',
         content: 'Hi, how can I help you today?',
       }
     ];
@@ -136,6 +137,7 @@ export default function CardsChat() {
                   },
                   body: JSON.stringify({
                     last_messages: all_messages,
+                    start_data: startData
                   }),
                 });
                 
@@ -152,7 +154,7 @@ export default function CardsChat() {
                 setMessages(prevMessages => [
                   ...prevMessages,
                   {
-                    role: 'agent',
+                    role: 'assistant',
                     content: data.response || "I'm sorry, I couldn't process your request.",
                   },
                 ]);
@@ -162,7 +164,7 @@ export default function CardsChat() {
                 setMessages(prevMessages => [
                   ...prevMessages,
                   {
-                    role: 'agent',
+                    role: 'assistant',
                     content: "I'm sorry, there was an error processing your request. Please try again.",
                   },
                 ]);
