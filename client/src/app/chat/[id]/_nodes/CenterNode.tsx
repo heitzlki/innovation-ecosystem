@@ -6,7 +6,7 @@ import { BorderBeam } from '@/components/magicui/border-beam';
 function CenterNode({ data }: { data: { color: string; title: string } }) {
   return (
     <div
-      className='px-4 py-2 bg-card text-card-foreground flex flex-col gap-6 rounded-xl border shadow-sm max-w-[280px] w-max'
+      className='px-8 py-4 bg-card text-card-foreground flex flex-col gap-6 rounded-xl border shadow-sm max-w-[280px] w-max'
       // style={{ background: data.color }}
     >
       <div className='flex'>
@@ -18,7 +18,24 @@ function CenterNode({ data }: { data: { color: string; title: string } }) {
           {/* <div className='dark:text-white'>{data.info}</div> */}
         </div>
       </div>
-
+      <Handle
+        type='target'
+        position={Position.Top}
+        className='opacity-0
+  height-0
+  width-0
+  top-auto
+  bottom-auto'
+      />
+      <Handle
+        type='source'
+        position={Position.Bottom}
+        className='opacity-0
+  height-0
+  width-0
+  top-auto
+  bottom-auto'
+      />
       {/* <Handle type='target' position={Position.Top} className='w-16' />
       <Handle type='source' position={Position.Bottom} className='w-16 ' /> */}
       <BorderBeam duration={8} size={20} />

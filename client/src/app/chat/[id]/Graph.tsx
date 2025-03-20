@@ -81,7 +81,7 @@ const edgeTypes = {
 
 export default function Graph() {
   const { nodes: initialNodes, edges: initialEdges } =
-    useEdgeParams().initialElements();
+    useEdgeParams().initialElements(3, 250);
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);

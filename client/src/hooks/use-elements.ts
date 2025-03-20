@@ -36,6 +36,8 @@ interface InitialElements {
   edges: Edge[];
 }
 
+const colors = ['#FD84FF', '#8BFFAC', '#00C2FF'];
+
 /**
  * Returns the intersection point between the center of the intersection node and the target node
  */
@@ -125,49 +127,99 @@ export const useEdgeParams = () => {
   /**
    * Generates initial nodes and edges in a circular layout
    */
-  const initialElements = useCallback((): InitialElements => {
-    const nodes: Node[] = [];
-    const edges: Edge[] = [];
-    // const center = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-    const center = { x: 0, y: 0 };
-
-    nodes.push({
-      id: 'target',
-      // type: 'center',
-      // draggable: false,
-      // selectable: false,
-      data: { color: '#FD84FF', title: 'Marketing' },
-      position: center,
-    });
-
-    for (let i = 0; i < 8; i++) {
-      const degrees = i * (360 / 8);
-      const radians = degrees * (Math.PI / 180);
-      const x = 250 * Math.cos(radians) + center.x;
-      const y = 250 * Math.sin(radians) + center.y;
+  const initialElements = useCallback(
+    (numNodes: number, size: number): InitialElements => {
+      const nodes: Node[] = [];
+      const edges: Edge[] = [];
+      const center = { x: 0, y: 0 };
 
       nodes.push({
-        id: `${i}`,
-        type: 'custom',
-        draggable: false,
-        selectable: false,
-        data: { color: '#FD84FF', title: 'Marketing' },
-        position: { x, y },
+        id: 'target',
+        type: 'center',
+        data: { color: '#FD84FF', title: 'Your Problem' },
+        position: center,
       });
+      // first layer
+      for (let i = 0; i < numNodes; i++) {
+        const degrees = i * (360 / numNodes);
+        const radians = degrees * (Math.PI / 180);
+        const x = size * Math.cos(radians) + center.x;
+        const y = size * Math.sin(radians) + center.y;
 
-      edges.push({
-        id: `edge-${i}`,
-        target: 'target',
-        source: `${i}`,
-        type: 'floating',
-        markerEnd: {
-          type: MarkerType.Arrow,
-        },
-      });
-    }
+        nodes.push({
+          id: `${i}`,
+          type: 'custom',
+          draggable: false,
+          selectable: false,
+          data: { color: colors[i], title: 'Marketing' },
+          position: { x, y },
+        });
 
-    return { nodes, edges };
-  }, []);
+        edges.push({
+          id: `edge-${i}`,
+          target: 'target',
+          source: `${i}`,
+          type: 'floating',
+          markerEnd: {
+            type: MarkerType.Arrow,
+          },
+        });
+      }
+      for (let i = 0; i < numNodes; i++) {
+        const degrees = i * (360 / numNodes);
+        const radians = degrees * (Math.PI / 180);
+        const x = size * 2 * Math.cos(radians) + center.x;
+        const y = size * 2 * Math.sin(radians) + center.y;
+
+        nodes.push({
+          id: `${i + 3}`,
+          type: 'custom',
+          draggable: false,
+          selectable: false,
+          data: { color: colors[i], title: 'Marketing' },
+          position: { x, y },
+        });
+
+        // edges.push({
+        //   id: `edge-${i}`,
+        //   target: 'target',
+        //   source: `${i}`,
+        //   type: 'floating',
+        //   markerEnd: {
+        //     type: MarkerType.Arrow,
+        //   },
+        // });
+      }
+      // for (let i = 0; i < numNodes * 3; i++) {
+      //   const degrees = i * (360 / (numNodes * 3));
+      //   const radians = degrees * (Math.PI / 180);
+      //   const x = size * 2 * Math.cos(radians) + center.x;
+      //   const y = size * 2 * Math.sin(radians) + center.y;
+
+      //   nodes.push({
+      //     id: `${i + numNodes}`,
+      //     type: 'custom',
+      //     draggable: false,
+      //     selectable: false,
+      //     data: { color: colors[i % 3], title: 'Sub Node' },
+      //     position: { x, y },
+      //   });
+
+      //   edges.push({
+      //     id: `edge-${i + numNodes}`,
+      //     target: `${i + numNodes}`,
+      //     source: `${i % numNodes}`,
+      //     type: 'floating',
+      //     markerEnd: {
+      //       type: MarkerType.Arrow,
+      //     },
+      //   });
+      // }
+
+      return { nodes, edges };
+    },
+    []
+  );
 
   return {
     getEdgeParams,

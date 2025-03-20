@@ -44,15 +44,7 @@ export default function CardsChat() {
     },
     {
       role: 'user',
-      content: "Hey, I'm having trouble with my account.",
-    },
-    {
-      role: 'agent',
-      content: 'What seems to be the problem?',
-    },
-    {
-      role: 'user',
-      content: "I can't log in.",
+      content: "Hey, I'm having trouble with my sales report.",
     },
   ]);
   const [input, setInput] = React.useState('');
@@ -64,7 +56,7 @@ export default function CardsChat() {
   //   </div> */}
   // </div>
   return (
-    <div className='fixed top-1/2 right-0 transform -translate-y-1/2 z-50 px-4 py-4'>
+    <div className='fixed top-1/2 right-0 transform -translate-y-1/2 z-50 px-4 py-12'>
       <Card>
         {/* <CardHeader className='flex flex-row items-center'>
           <div className='flex items-center space-x-4'>

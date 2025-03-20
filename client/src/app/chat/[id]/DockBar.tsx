@@ -37,7 +37,7 @@ const DATA = {
 
 export default function DockBar() {
   return (
-    <div className='fixed w-full top-0 z-50 px-4 py-4'>
+    <div className='fixed w-full top-0 z-50 px-4 py-8'>
       <div className='flex flex-col items-center justify-center'>
         <TooltipProvider>
           <Dock direction='middle' className='mt-0 bg-card'>
