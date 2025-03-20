@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import DockBar from './DockBar';
 import ChatWindow from './ChatWindow';
 import Graph from './Graph';
+import Roadmap from './Roadmap';
 
 export default function Chat({ params }: { params: Promise<{ id: string }> }) {
   const [startData, setStartData] = useState<any>(null);
@@ -12,7 +13,7 @@ export default function Chat({ params }: { params: Promise<{ id: string }> }) {
   useEffect(() => {
     // Retrieve data from localStorage
     const storedData = localStorage.getItem('startData');
-    
+
     if (storedData) {
       try {
         const parsedData = JSON.parse(storedData);
@@ -21,14 +22,14 @@ export default function Chat({ params }: { params: Promise<{ id: string }> }) {
         console.error('Error parsing stored data:', error);
       }
     }
-    
+
     setIsLoading(false);
   }, []);
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-lg font-medium">Loading...</div>
+      <div className='flex items-center justify-center min-h-screen'>
+        <div className='text-lg font-medium'>Loading...</div>
       </div>
     );
   }
@@ -38,6 +39,7 @@ export default function Chat({ params }: { params: Promise<{ id: string }> }) {
       <DockBar />
       <ChatWindow />
       <Graph startData={startData} />
+      <Roadmap />
     </div>
   );
 }

@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
+import { BorderBeam } from '@/components/magicui/border-beam';
 
 import { ModeToggle } from '@/components/mode-toggle';
 import { buttonVariants } from '@/components/ui/button';
@@ -29,6 +30,7 @@ import { Label } from '@/components/ui/label';
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
+import { useStore } from '@/lib/store';
 import { Check, Plus, Send } from 'lucide-react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -37,6 +39,7 @@ import { CardContent, CardHeader, CardFooter } from '@/components/ui/card';
 export default function CardsChat() {
   const [open, setOpen] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
+  const { color1, color2 } = useStore();
 
   // Initialize messages based on startData if available
   const [messages, setMessages] = React.useState(() => {
@@ -60,7 +63,7 @@ export default function CardsChat() {
   // </div>
   return (
     <div className='fixed top-1/2 right-0 transform -translate-y-1/2 z-50 px-4 py-12'>
-      <Card>
+      <Card className='relative w-[350px] overflow-hidden'>
         {/* <CardHeader className='flex flex-row items-center'>
           <div className='flex items-center space-x-4'>
             <Avatar>
@@ -190,6 +193,18 @@ export default function CardsChat() {
             </Button>
           </form>
         </CardFooter>
+        <BorderBeam
+          duration={6}
+          size={400}
+          // className={`from-transparent via-[${color1}] to-transparent`}
+          className={`from-transparent via-[hsl(0, 100%, 50%)] to-transparent`}
+        />
+        <BorderBeam
+          duration={6}
+          delay={3}
+          size={400}
+          className={`from-transparent via-[${color2}] to-transparent`}
+        />
       </Card>
     </div>
   );
