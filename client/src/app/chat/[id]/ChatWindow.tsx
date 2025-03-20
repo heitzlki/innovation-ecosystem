@@ -137,7 +137,7 @@ export default function CardsChat() {
           duration={6}
           size={400}
           // className={`from-transparent via-[${color1}] to-transparent`}
-          className={`from-transparent via-[hsl(0, 100%, 50%)] to-transparent`}
+          className={`from-transparent via-[#FF0000] to-transparent`}
         />
         <BorderBeam
           duration={6}
