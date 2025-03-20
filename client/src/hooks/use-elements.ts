@@ -131,7 +131,7 @@ export const useEdgeParams = () => {
     (numNodes: number, size: number): InitialElements => {
       const nodes: Node[] = [];
       const edges: Edge[] = [];
-      const center = { x: 0, y: 0 };
+      const    center = { x: 0, y: 0 };
 
       nodes.push({
         id: 'target',
@@ -143,8 +143,8 @@ export const useEdgeParams = () => {
       for (let i = 0; i < numNodes; i++) {
         const degrees = i * (360 / numNodes);
         const radians = degrees * (Math.PI / 180);
-        const x = size * Math.cos(radians) + center.x;
-        const y = size * Math.sin(radians) + center.y;
+        const x = Math.round(size * Math.cos(radians) + center.x);
+        const y = Math.round(size * Math.sin(radians) + center.y);
 
         nodes.push({
           id: `${i}`,
@@ -154,7 +154,7 @@ export const useEdgeParams = () => {
           data: { color: colors[i], title: 'Marketing' },
           position: { x, y },
         });
-
+      
         edges.push({
           id: `edge-${i}`,
           target: 'target',
@@ -165,30 +165,38 @@ export const useEdgeParams = () => {
           },
         });
       }
-      for (let i = 0; i < numNodes; i++) {
-        const degrees = i * (360 / numNodes);
-        const radians = degrees * (Math.PI / 180);
-        const x = size * 2 * Math.cos(radians) + center.x;
-        const y = size * 2 * Math.sin(radians) + center.y;
+      nodes.forEach((node) => {
+        console.log(`Node ID: ${node.id}, X: ${node.position.x}, Y: ${node.position.y}`);
+      });
+      //second layer
+      for (let i = 1; i <= numNodes; i++) {
+        for(let j = 0; j < numNodes; j++){
+          const degrees = -60 + j*120/(numNodes-1) + (i-1)*120;
+          const radians = degrees * (Math.PI / 180);
+          // The position of the grandchild node is the position of the child node plus the added distance between child and grandchild (plus the size of the child node)
+          const x = nodes[i].position.x + size*0.75*Math.cos(radians) + center.x;
+          const y = nodes[i].position.y + size*0.5*Math.sin(radians) + center.y;
 
-        nodes.push({
-          id: `${i + 3}`,
-          type: 'custom',
-          draggable: false,
-          selectable: false,
-          data: { color: colors[i], title: 'Marketing' },
-          position: { x, y },
-        });
+          nodes.push({
+            //if child node has id i, then grandchild nodes will have id's from j+1 to j+numNodes
+            id: `${(i)*3 + j}`,
+            type: 'custom',
+            draggable: true,
+            selectable: false,
+            data: { color: colors[i], title: 'Marketing' },
+            position: { x, y },
+          });
 
-        // edges.push({
-        //   id: `edge-${i}`,
-        //   target: 'target',
-        //   source: `${i}`,
-        //   type: 'floating',
-        //   markerEnd: {
-        //     type: MarkerType.Arrow,
-        //   },
-        // });
+          edges.push({
+            id: `edge-${(i)*3 + j}`,
+            target: `${i-1}`,
+            source: `${(i)*3 + j}`,
+            type: 'floating',
+            markerEnd: {
+              type: MarkerType.Arrow,
+            },
+          });
+        }
       }
       // for (let i = 0; i < numNodes * 3; i++) {
       //   const degrees = i * (360 / (numNodes * 3));
