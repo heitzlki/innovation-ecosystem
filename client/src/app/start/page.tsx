@@ -84,10 +84,6 @@ export default function Start() {
   });
 
   const [submitted, setSubmitted] = useState(false);
-  6;
-  const [widthPercentage1, setWidthPercentage1] = useState<number>(50);
-  const [widthPercentage2, setWidthPercentage2] = useState<number>(50);
-  const [widthPercentage3, setWidthPercentage3] = useState<number>(50);
 
   const [colorSlider, setColorSlider] = useState<number[]>([50, 50, 50]);
 
