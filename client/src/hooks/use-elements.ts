@@ -36,7 +36,13 @@ interface InitialElements {
   edges: Edge[];
 }
 
-const colors = ['#FD84FF', '#8BFFAC', '#00C2FF'];
+import { Area } from '@/types';
+
+const colors = [
+  'hsla(299, 100%, 76%, 0.4)',
+  'hsla(137, 100%, 77%, 0.4)',
+  'hsla(194, 100%, 50%, 0.4)',
+];
 
 /**
  * Returns the intersection point between the center of the intersection node and the target node
@@ -128,15 +134,15 @@ export const useEdgeParams = () => {
    * Generates initial nodes and edges in a circular layout
    */
   const initialElements = useCallback(
-    (numNodes: number, size: number): InitialElements => {
+    (numNodes: number, size: number, startData: Area[]): InitialElements => {
       const nodes: Node[] = [];
       const edges: Edge[] = [];
-      const    center = { x: 0, y: 0 };
+      const center = { x: 0, y: 0 };
 
       nodes.push({
         id: 'target',
         type: 'center',
-        data: { color: '#FD84FF', title: 'Your Problem' },
+        data: { color: '#000', title: 'Your Problem' },
         position: center,
       });
       // first layer
@@ -149,12 +155,12 @@ export const useEdgeParams = () => {
         nodes.push({
           id: `${i}`,
           type: 'custom',
-          draggable: false,
-          selectable: false,
-          data: { color: colors[i], title: 'Marketing' },
+          // draggable: false,
+          // selectable: false,
+          data: { color: colors[i], title: startData[i].area.name },
           position: { x, y },
         });
-      
+
         edges.push({
           id: `edge-${i}`,
           target: 'target',
@@ -166,31 +172,36 @@ export const useEdgeParams = () => {
         });
       }
       nodes.forEach((node) => {
-        console.log(`Node ID: ${node.id}, X: ${node.position.x}, Y: ${node.position.y}`);
+        // console.log(`Node ID: ${node.id}, X: ${node.position.x}, Y: ${node.position.y}`);
       });
       //second layer
       for (let i = 1; i <= numNodes; i++) {
-        for(let j = 0; j < numNodes; j++){
-          const degrees = -60 + j*120/(numNodes-1) + (i-1)*120;
+        for (let j = 0; j < numNodes; j++) {
+          const degrees = -60 + (j * 120) / (numNodes - 1) + (i - 1) * 120;
           const radians = degrees * (Math.PI / 180);
           // The position of the grandchild node is the position of the child node plus the added distance between child and grandchild (plus the size of the child node)
-          const x = nodes[i].position.x + size*0.75*Math.cos(radians) + center.x;
-          const y = nodes[i].position.y + size*0.5*Math.sin(radians) + center.y;
+          const x =
+            nodes[i].position.x + size * 0.75 * Math.cos(radians) + center.x;
+          const y =
+            nodes[i].position.y + size * 0.5 * Math.sin(radians) + center.y;
 
           nodes.push({
             //if child node has id i, then grandchild nodes will have id's from j+1 to j+numNodes
-            id: `${(i)*3 + j}`,
+            id: `${i * 3 + j}`,
             type: 'custom',
-            draggable: true,
-            selectable: false,
-            data: { color: colors[i], title: 'Marketing' },
+            // draggable: true,
+            // selectable: false,
+            data: {
+              color: colors[i - 1],
+              title: startData[i - 1].area.contacts[j].name,
+            },
             position: { x, y },
           });
 
           edges.push({
-            id: `edge-${(i)*3 + j}`,
-            target: `${i-1}`,
-            source: `${(i)*3 + j}`,
+            id: `edge-${i * 3 + j}`,
+            target: `${i - 1}`,
+            source: `${i * 3 + j}`,
             type: 'floating',
             markerEnd: {
               type: MarkerType.Arrow,

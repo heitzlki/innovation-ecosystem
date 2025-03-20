@@ -52,23 +52,23 @@ export default function CardsChat({ startData }: ChatWindowProps) {
       {
         role: 'assistant',
         content: 'Hi, how can I help you today?',
-      }
+      },
     ];
-    
+
     // If we have startData, add a welcome message referencing all the submitted data
     if (startData) {
       // Format a message that includes slider data if available
       const welcomeMessage = `Welcome, I'm your personal Innovation Assistant. In the middle you can see possible areas of inovation relate
       to your problems. Feel free to explore the graph. Once your ready, we can get started developing a roadmap towards more innovation.`;
-      
+
       return [
         {
           role: 'assistant',
           content: welcomeMessage,
-        }
+        },
       ];
     }
-    
+
     return defaultMessages;
   });
   const [input, setInput] = React.useState('');
@@ -80,8 +80,8 @@ export default function CardsChat({ startData }: ChatWindowProps) {
   //   </div> */}
   // </div>
   return (
-    <div className='fixed top-1/2 right-0 transform -translate-y-1/2 z-50 px-4 py-12'>
-      <Card className='relative w-[500px] overflow-hidden'>
+    <div className='fixed top-1/2 right-0 transform -translate-y-1/2 z-50 px-4 py-14'>
+      <Card className='relative w-[350px] overflow-hidden h-full'>
         {/* <CardHeader className='flex flex-row items-center'>
           <div className='flex items-center space-x-4'>
             <Avatar>
@@ -115,7 +115,7 @@ export default function CardsChat({ startData }: ChatWindowProps) {
               <div
                 key={index}
                 className={cn(
-                  'flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm',
+                  'flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm ',
                   message.role === 'user'
                     ? 'ml-auto bg-primary text-primary-foreground'
                     : 'bg-muted'
@@ -130,23 +130,26 @@ export default function CardsChat({ startData }: ChatWindowProps) {
             onSubmit={async (event) => {
               event.preventDefault();
               if (inputLength === 0) return;
-              
+
               // Add user message to the UI immediately
               const userMessage = {
                 role: 'user',
                 content: input,
               };
-              
-              const all_messages = [...messages, userMessage]
+
+              const all_messages = [...messages, userMessage];
               setMessages(all_messages);
-              console.log(all_messages)
+              console.log(all_messages);
               const userInput = input;
               setInput('');
               setIsLoading(true);
-              
+
               try {
                 // Call the message endpoint
-                const url = new URL('http://127.0.0.1:8000/message', window.location.origin);
+                const url = new URL(
+                  'http://127.0.0.1:8000/message',
+                  window.location.origin
+                );
                 const response = await fetch(url, {
                   method: 'POST',
                   headers: {
@@ -154,35 +157,38 @@ export default function CardsChat({ startData }: ChatWindowProps) {
                   },
                   body: JSON.stringify({
                     last_messages: all_messages,
-                    start_data: startData
+                    start_data: startData,
                   }),
                 });
-                
+
                 if (!response.ok) {
                   throw new Error('Failed to get response');
                 }
-                
+
                 // Get the response message
                 const data = await response.json();
 
                 console.log('data:', data);
-                
+
                 // Add the response message to the UI
-                setMessages(prevMessages => [
+                setMessages((prevMessages) => [
                   ...prevMessages,
                   {
                     role: 'assistant',
-                    content: data.response || "I'm sorry, I couldn't process your request.",
+                    content:
+                      data.response ||
+                      "I'm sorry, I couldn't process your request.",
                   },
                 ]);
               } catch (error) {
                 console.error('Error fetching message response:', error);
                 // Add an error message
-                setMessages(prevMessages => [
+                setMessages((prevMessages) => [
                   ...prevMessages,
                   {
                     role: 'assistant',
-                    content: "I'm sorry, there was an error processing your request. Please try again.",
+                    content:
+                      "I'm sorry, there was an error processing your request. Please try again.",
                   },
                 ]);
               } finally {
@@ -198,13 +204,12 @@ export default function CardsChat({ startData }: ChatWindowProps) {
               value={input}
               onChange={(event) => setInput(event.target.value)}
             />
-            <Button 
-              type='submit' 
-              size='icon' 
-              disabled={inputLength === 0 || isLoading}
-            >
+            <Button
+              type='submit'
+              size='icon'
+              disabled={inputLength === 0 || isLoading}>
               {isLoading ? (
-                <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
+                <div className='h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent' />
               ) : (
                 <Send />
               )}
@@ -216,7 +221,7 @@ export default function CardsChat({ startData }: ChatWindowProps) {
           duration={6}
           size={400}
           // className={`from-transparent via-[${color1}] to-transparent`}
-          className={`from-transparent via-[#FF0000] to-transparent`}
+          className={`from-transparent via-[color:${color1}] to-transparent`}
         />
         <BorderBeam
           duration={6}

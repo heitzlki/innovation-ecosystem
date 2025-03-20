@@ -15,6 +15,7 @@ import {
 import '@xyflow/react/dist/style.css';
 
 import { useEdgeParams } from '@/hooks/use-elements';
+import { GraphProps } from '@/types';
 
 // const initialNodes = [
 //   // {
@@ -79,14 +80,27 @@ const edgeTypes = {
   // button: ButtonEdge,
 };
 
-interface GraphProps {
-  startData?: any;
-}
-
 export default function Graph({ startData }: GraphProps) {
-  console.log('startData:', startData);
+  console.log('startData:', startData[0].area.contacts[0]);
+
+  // if (startData.length !== 0) {
+  //   if (startData[0]?.contacts?.length !== 0) {
+  //     console.log('startData[0].contacts:', startData[0].contacts);
+  //   }
+  // }
+
+  // for (const area of startData) {
+  //   console.log('area:', area);
+  //   if (area.contacts.length === 0) {
+  //     console.log('No contacts for:', area.name);
+  //   }
+  //   for (const contact of area.contacts) {
+  //     console.log('contact:', contact);
+  //   }
+  // }
+
   const { nodes: initialNodes, edges: initialEdges } =
-    useEdgeParams().initialElements(3, 250);
+    useEdgeParams().initialElements(3, 250, startData);
 
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);

@@ -5,9 +5,8 @@ import { BorderBeam } from '@/components/magicui/border-beam';
 function InfoNode({ data }: { data: { color: string; title: string } }) {
   return (
     <div
-      className='px-4 py-2 bg-card text-card-foreground flex flex-col gap-6 rounded-xl border shadow-sm max-w-[280px] w-max'
-      // style={{ borderColor: '#FD84FF', border: '1px solid' }}
-    >
+      className='px-4 py-2 bg-card text-card-foreground flex flex-col gap-6 rounded-xl shadow-sm max-w-[280px] w-max border border-gray-800 border-opacity-10'
+      style={{ borderColor: data.color }}>
       <div className='flex'>
         {/* <div className='rounded-full w-12 h-12 flex justify-center items-center '>
           {data.emoji}

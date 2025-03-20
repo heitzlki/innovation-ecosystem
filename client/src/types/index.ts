@@ -32,3 +32,23 @@ export interface TestimonialProps {
   company: string;
   image: string;
 }
+
+export interface Contact {
+  name: string;
+  description: string;
+  institution: string;
+  email: string;
+  website: string;
+}
+
+export interface Area {
+  area: {
+    name: string;
+    rating: number;
+    contacts: Contact[];
+  };
+}
+
+export interface GraphProps {
+  startData: Area[];
+}

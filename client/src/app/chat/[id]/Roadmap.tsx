@@ -31,7 +31,12 @@ const nodes = [
   {
     id: '2',
     data: { label: 'World' },
-    position: { x: 100, y: 100 },
+    position: { x: 0, y: 100 },
+  },
+  {
+    id: '2',
+    data: { label: 'World' },
+    position: { x: 0, y: 150 },
   },
 ];
 
