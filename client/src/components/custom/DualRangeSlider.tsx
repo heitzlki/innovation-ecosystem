@@ -4,6 +4,7 @@ import * as React from 'react';
 import * as SliderPrimitive from '@radix-ui/react-slider';
 import { cn } from '@/lib/utils';
 import NumberFlow from '@number-flow/react';
+import { randomUUID } from 'crypto';
 
 interface DualRangeSliderProps
   extends React.ComponentProps<typeof SliderPrimitive.Root> {
@@ -67,7 +68,7 @@ const DualRangeSlider = React.forwardRef<
                     )}
                     <NumberFlow
                       willChange
-                      // @ts-ignore
+                      // @ts-expect-error idk lint or something - backend guy
                       value={value}
                       isolate
                       opacityTiming={{
@@ -101,8 +102,9 @@ const DualRangeSlider = React.forwardRef<
 
         {label && labelPosition === 'static' && (
           <>
-            {initialValue.map((value, index) => (
+            {initialValue.map((value) => (
               <div
+                key={randomUUID()}
                 className={cn(
                   'absolute -top-7 w-fit right-0 flex  justify-center items-start gap-0.5'
                 )}>
@@ -119,7 +121,7 @@ const DualRangeSlider = React.forwardRef<
                 )}
                 <NumberFlow
                   willChange
-                  // @ts-ignore
+                  // @ts-expect-error idk lint or something - backend guy
                   value={value}
                   isolate
                   opacityTiming={{

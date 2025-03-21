@@ -1,40 +1,21 @@
 'use client';
 
-import {
-  CalendarIcon,
-  HomeIcon,
-  MailIcon,
-  PencilIcon,
-  User,
-  UserIcon,
-} from 'lucide-react';
-import Link from 'next/link';
 import React from 'react';
-import { BorderBeam } from '@/components/magicui/border-beam';
-
-import { ModeToggle } from '@/components/mode-toggle';
-import { buttonVariants } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { cn } from '@/lib/utils';
-import { Dock, DockIcon } from '@/components/magicui/dock';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
-import { Check, Plus, Send } from 'lucide-react';
+import { Plus } from 'lucide-react';
 
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { CardContent, CardHeader, CardFooter } from '@/components/ui/card';
-import { useStore } from '@/lib/store';
 
 export default function InfoWindow() {
   return (

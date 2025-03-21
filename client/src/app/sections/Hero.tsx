@@ -4,8 +4,6 @@ import { Button } from '../../components/ui/button';
 import type { AnimatedProps } from '../../types/motion';
 import { motion } from 'framer-motion';
 
-import { AuroraText } from '@/components/magicui/aurora-text';
-import { RainbowButton } from '@/components/magicui/rainbow-button';
 import Link from 'next/link';
 
 export function Hero({ id }: AnimatedProps) {

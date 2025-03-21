@@ -3,10 +3,10 @@ import {
 } from './types';
 import { jwtDecode } from 'jwt-decode';
 
-const BASE_URL = process.env.BACKEND_URL;
+export const BASE_URL = process.env.BACKEND_URL ?? 'http://127.0.0.1:8000';
 
 export const fetchToken = async (username: string, password: string): Promise<TokenResponse> => {
-  const response = await fetch(`http://127.0.0.1:8000/token`, {
+  const response = await fetch(`${BASE_URL}/token`, {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",

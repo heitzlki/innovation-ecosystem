@@ -10,7 +10,6 @@ import InfoWindow from './InfoWindow';
 import { useStore } from '@/lib/store';
 
 export default function Chat() {
-  const [startData, setStartData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { setGraphData } = useStore();
 
@@ -21,7 +20,6 @@ export default function Chat() {
     if (storedData) {
       try {
         const parsedData = JSON.parse(storedData);
-        setStartData(parsedData);
         setGraphData(parsedData);
       } catch (error) {
         console.error('Error parsing stored data:', error);

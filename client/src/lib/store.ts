@@ -12,7 +12,7 @@ interface ClientState {
   setColor2: (color: string) => void;
 }
 
-export const useStore = create<ClientState>((set, get) => ({
+export const useStore = create<ClientState>((set) => ({
   roadmap: false,
   color1: 'hsl(186,100%,50%)',
   color2: 'hsl(156,100%,50%)',
