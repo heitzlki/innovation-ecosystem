@@ -1,19 +1,15 @@
 'use client';
 
 import * as React from 'react';
-import { Minus, Plus } from 'lucide-react';
 
 import { useStore } from '@/lib/store';
-import { Button } from '@/components/ui/button';
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
 } from '@/components/ui/drawer';
 
 import { ReactFlow, Controls, Background } from '@xyflow/react';
@@ -32,7 +28,12 @@ const nodes = [
     id: '2',
     type: "custom",
     data: { label: 'World' },
-    position: { x: 100, y: 100 },
+    position: { x: 0, y: 100 },
+  },
+  {
+    id: '2',
+    data: { label: 'World' },
+    position: { x: 0, y: 150 },
   },
   {
     id: '3',

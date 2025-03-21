@@ -7,10 +7,13 @@ import Graph from './Graph';
 import Roadmap from './Roadmap';
 import { DrawerDemo } from './ActivityBar';
 import { Drawer } from 'vaul';
+import InfoWindow from './InfoWindow';
 
-export default function Chat({ params }: { params: Promise<{ id: string }> }) {
-  const [startData, setStartData] = useState<any>(null);
+import { useStore } from '@/lib/store';
+
+export default function Chat() {
   const [isLoading, setIsLoading] = useState(true);
+  const { setGraphData } = useStore();
 
   useEffect(() => {
     // Retrieve data from localStorage
@@ -19,7 +22,7 @@ export default function Chat({ params }: { params: Promise<{ id: string }> }) {
     if (storedData) {
       try {
         const parsedData = JSON.parse(storedData);
-        setStartData(parsedData);
+        setGraphData(parsedData);
       } catch (error) {
         console.error('Error parsing stored data:', error);
       }
@@ -39,9 +42,10 @@ export default function Chat({ params }: { params: Promise<{ id: string }> }) {
   return (
     <div suppressHydrationWarning>
       <DockBar />
-      <ChatWindow startData={startData} />
-      <Graph startData={startData} />
+      <ChatWindow />
+      <Graph />
       <DrawerDemo />
+      <InfoWindow />
     </div>
   );
 }

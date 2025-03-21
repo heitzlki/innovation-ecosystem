@@ -6,43 +6,27 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '../../components/ui/card';
-import { cn } from '../../lib/utils';
-3;
-import { DualRangeSlider } from '@/components/custom/DualRangeSlider';
-import { REGEXP_ONLY_DIGITS_AND_CHARS } from 'input-otp';
 
-import { Checkbox } from '../../components/ui/checkbox';
+import { DualRangeSlider } from '@/components/custom/DualRangeSlider';
+
 import { Input } from '../../components/ui/input';
-import { Label } from '../../components/ui/label';
-import { MagicCard } from '../../components/magicui/magic-card';
-import { useTheme } from 'next-themes';
 
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-// import { toast } from '@/components/hooks/use-toast';
 import { toast } from 'sonner';
 import { Textarea } from '@/components/ui/textarea';
 import { BorderBeam } from '../../components/magicui/border-beam';
-import { Slider } from '@/components/ui/slider';
 
 // import { NumberTicker } from '@/components/magicui/number-ticker';
 
-import {
-  InputOTP,
-  InputOTPGroup,
-  InputOTPSeparator,
-  InputOTPSlot,
-} from '../../components/ui/input-otp';
 
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -66,9 +50,9 @@ const formSchema = z.object({
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { BASE_URL } from '../api';
 
 export default function Start() {
-  const { theme } = useTheme();
   const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -82,8 +66,6 @@ export default function Start() {
       // terms: false,
     },
   });
-
-  const [submitted, setSubmitted] = useState(false);
 
   const [colorSlider, setColorSlider] = useState<number[]>([50, 50, 50]);
 
@@ -116,8 +98,8 @@ export default function Start() {
     const lightness2 = (value3 / 100) * 50 + 25; // Map to 25-75 for better contrast
 
     // Generate HSL color strings
-    const color1 = `hsl(${hue1}, ${saturation1}%, ${lightness1}%)`;
-    const color2 = `hsl(${hue2}, ${saturation2}%, ${lightness2}%)`;
+    const color1 = `hsl(${hue1},${saturation1}%,${lightness1}%)`;
+    const color2 = `hsl(${hue2},${saturation2}%,${lightness2}%)`;
 
     // Set colors
     setColor1(color1);
@@ -130,7 +112,6 @@ export default function Start() {
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     try {
-      setSubmitted(true);
       setIsLoading(true);
 
       // Convert form data to match slider values
@@ -143,8 +124,8 @@ export default function Start() {
       };
 
       // Construct URL with query parameters
-      const url = new URL('http://127.0.0.1:8000/init', window.location.origin);
-      
+      const url = new URL(`${BASE_URL}/init`, window.location.origin);
+
       // Add all form data as query parameters
       url.searchParams.append('role', data.role);
       url.searchParams.append('problem', data.problem);
@@ -163,11 +144,11 @@ export default function Start() {
 
       // Parse response data
       const responseData = await response.json();
-      
+
       // Add the slider data to the response before storing
       const fullData = {
         ...responseData,
-        ...sliderData
+        ...sliderData,
       };
 
       // Store response data in localStorage to access it on the next page
@@ -250,7 +231,7 @@ export default function Start() {
                 <FormField
                   control={form.control}
                   name='clue'
-                  render={({ field }) => (
+                  render={() => (
                     <FormItem>
                       <FormLabel>
                         How confident are you in knowing what your problems are?
@@ -279,7 +260,7 @@ export default function Start() {
                 <FormField
                   control={form.control}
                   name='motivation'
-                  render={({ field }) => (
+                  render={() => (
                     <FormItem>
                       <FormLabel>
                         How motivated are you to implement possible solutions?
@@ -306,7 +287,7 @@ export default function Start() {
                 <FormField
                   control={form.control}
                   name='confidence'
-                  render={({ field }) => (
+                  render={() => (
                     <FormItem>
                       <FormLabel>
                         How confident do you feel about your current situation?{' '}

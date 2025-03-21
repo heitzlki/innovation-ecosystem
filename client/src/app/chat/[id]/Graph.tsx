@@ -3,13 +3,12 @@
 import React, { useCallback } from 'react';
 import {
   ReactFlow,
-  MiniMap,
-  Controls,
   Background,
   useNodesState,
   useEdgesState,
   addEdge,
   BackgroundVariant,
+  Connection,
 } from '@xyflow/react';
 
 import '@xyflow/react/dist/style.css';
@@ -67,6 +66,7 @@ import InfoNode from './_nodes/InfoNode';
 
 import FloatingEdge from './_edges/FloatingEdge';
 import CenterNode from './_nodes/CenterNode';
+import { useStore } from '@/lib/store';
 
 const nodeTypes = {
   annotation: AnnotationNode,
@@ -79,20 +79,16 @@ const edgeTypes = {
   // button: ButtonEdge,
 };
 
-interface GraphProps {
-  startData?: any;
-}
-
-export default function Graph({ startData }: GraphProps) {
-  console.log('startData:', startData);
+export default function Graph() {
+  const { graphData } = useStore();
   const { nodes: initialNodes, edges: initialEdges } =
-    useEdgeParams().initialElements(3, 250);
+    useEdgeParams().initialElements(3, 260, graphData);
 
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect = useCallback(
-    (params: any) => setEdges((eds) => addEdge(params, eds)),
+    (params: Connection) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
 
