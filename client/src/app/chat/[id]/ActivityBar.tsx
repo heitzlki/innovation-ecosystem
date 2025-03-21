@@ -76,7 +76,7 @@ export function DrawerDemo() {
         <Button variant="outline">Open Drawer</Button>
       </DrawerTrigger>
       <DrawerContent>
-        <div>
+        <div style={{ pointerEvents: 'none' }}>
           <DrawerHeader>
             <DrawerTitle className="text-center w-full text-2xl">Innovation Roadmap</DrawerTitle>
             <DrawerDescription className="text-center w-full">Next proposed steps</DrawerDescription>
