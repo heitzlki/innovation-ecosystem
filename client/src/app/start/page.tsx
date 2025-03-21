@@ -136,7 +136,16 @@ export default function Start() {
       console.log('Submitting data:', sliderData);
 
       // Make GET request to server
-      const response = await fetch(url.toString());
+      const response = await fetch(url.toString(), 
+        {
+          method: 'GET',
+          headers: {
+            'Origin': 'http://innovation-sg.ch',
+            'Access-Control-Request-Method': 'GET',
+            'Content-Type': 'application/json',
+          },
+        }
+    );
 
       if (!response.ok) {
         throw new Error('Server response was not ok');
