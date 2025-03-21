@@ -50,7 +50,7 @@ function CenterNode({ data, id }: { data: { color: string; title: string }, id: 
   top-auto
   bottom-auto'
       />
-      <BorderBeam duration={3} size={50} colorFrom={color1} colorTo={color2} />
+      {/* <BorderBeam duration={3} size={50} colorFrom={color1} colorTo={color2} /> */}
     </div>
   );
 }
