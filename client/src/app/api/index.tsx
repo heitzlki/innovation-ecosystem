@@ -3,7 +3,7 @@ import {
 } from './types';
 import { jwtDecode } from 'jwt-decode';
 
-export const BASE_URL = process.env.BACKEND_URL ?? 'http://127.0.0.1:8000';
+export const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL ?? 'http://127.0.0.1:8000';
 
 export const fetchToken = async (username: string, password: string): Promise<TokenResponse> => {
   const response = await fetch(`${BASE_URL}/token`, {
