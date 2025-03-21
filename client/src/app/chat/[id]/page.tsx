@@ -49,3 +49,5 @@ export default function Chat() {
     </div>
   );
 }
+
+export const runtime = 'edge'
