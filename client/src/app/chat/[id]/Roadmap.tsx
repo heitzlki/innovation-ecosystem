@@ -1,19 +1,15 @@
 'use client';
 
 import * as React from 'react';
-import { Minus, Plus } from 'lucide-react';
 
 import { useStore } from '@/lib/store';
-import { Button } from '@/components/ui/button';
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
 } from '@/components/ui/drawer';
 
 import { ReactFlow, Controls, Background } from '@xyflow/react';

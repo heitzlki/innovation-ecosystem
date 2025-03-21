@@ -8,12 +8,10 @@ import {
   CardTitle,
 } from '../../components/ui/card';
 import { Input } from '../../components/ui/input';
-import { Label } from '../../components/ui/label';
 import { BorderBeam } from '../../components/magicui/border-beam';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 
 import {
   Form,
@@ -25,7 +23,7 @@ import {
 } from '../../components/ui/form';
 
 // import { useNavigate } from "react-router-dom";
-import { AuthProvider, useAuth } from '../contexts/authContext';
+import { useAuth } from '../contexts/authContext';
 import { fetchToken } from "../api/index";
 
 
@@ -37,16 +35,14 @@ const formSchema = z.object({
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useTheme } from 'next-themes';
 
 export default function Login() {
-  const { theme } = useTheme();
   const router = useRouter();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  // const navigate = useNavigate();
+
+  console.log(error);
+
   const { login } = useAuth();
 
   const form = useForm<z.infer<typeof formSchema>>({

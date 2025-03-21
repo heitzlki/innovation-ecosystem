@@ -3,12 +3,9 @@
 import { useStore } from '@/lib/store';
 
 import {
-  CalendarIcon,
   HomeIcon,
-  MailIcon,
   MapPlusIcon,
   PencilIcon,
-  User,
   UserIcon,
 } from 'lucide-react';
 import Link from 'next/link';
@@ -16,7 +13,6 @@ import React from 'react';
 
 import { ModeToggle } from '@/components/mode-toggle';
 import { buttonVariants } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
 import {
   Tooltip,
   TooltipContent,
@@ -39,6 +35,7 @@ const DATA = {
 
 export default function DockBar() {
   const { roadmap, setRoadmap } = useStore();
+  console.log(roadmap)
 
   return (
     <div className='fixed w-full top-0 z-50 px-4 py-5'>

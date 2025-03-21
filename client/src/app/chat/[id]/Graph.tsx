@@ -3,19 +3,17 @@
 import React, { useCallback } from 'react';
 import {
   ReactFlow,
-  MiniMap,
-  Controls,
   Background,
   useNodesState,
   useEdgesState,
   addEdge,
   BackgroundVariant,
+  Connection,
 } from '@xyflow/react';
 
 import '@xyflow/react/dist/style.css';
 
 import { useEdgeParams } from '@/hooks/use-elements';
-import { GraphProps } from '@/types';
 
 // const initialNodes = [
 //   // {
@@ -86,11 +84,11 @@ export default function Graph() {
   const { nodes: initialNodes, edges: initialEdges } =
     useEdgeParams().initialElements(3, 260, graphData);
 
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
   const onConnect = useCallback(
-    (params: any) => setEdges((eds) => addEdge(params, eds)),
+    (params: Connection) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
 

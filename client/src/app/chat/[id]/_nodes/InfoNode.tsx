@@ -1,6 +1,5 @@
 import React, { memo } from 'react';
 import { Handle, Position } from '@xyflow/react';
-import { BorderBeam } from '@/components/magicui/border-beam';
 
 function InfoNode({ data }: { data: { color: string; title: string } }) {
   return (

@@ -171,9 +171,6 @@ export const useEdgeParams = () => {
           },
         });
       }
-      nodes.forEach((node) => {
-        // console.log(`Node ID: ${node.id}, X: ${node.position.x}, Y: ${node.position.y}`);
-      });
       //second layer
       for (let i = 1; i <= numNodes; i++) {
         for (let j = 0; j < numNodes; j++) {
