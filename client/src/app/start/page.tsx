@@ -147,6 +147,7 @@ export default function Start() {
 
       // Add the slider data to the response before storing
       const fullData = {
+        //@ts-expect-error type error
         ...responseData,
         ...sliderData,
       };
