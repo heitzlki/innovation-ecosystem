@@ -1,114 +1,108 @@
 'use client';
-
-import * as React from 'react';
-
+import { X } from 'lucide-react';
 import { useStore } from '@/lib/store';
+import * as React from 'react';
+import { Minus, Plus } from 'lucide-react';
+import { Bar, BarChart, ResponsiveContainer } from 'recharts';
+import {
+  ReactFlow,
+  Controls,
+  Background,
+  BackgroundVariant,
+} from '@xyflow/react';
+
+import AnnotationNode from './_nodes/AnnotationNode';
+import InfoNode from './_nodes/InfoNode';
+
+import FloatingEdge from './_edges/FloatingEdge';
+import CenterNode from './_nodes/CenterNode';
+
+const nodeTypes = {
+  annotation: AnnotationNode,
+  custom: InfoNode,
+  center: CenterNode,
+  roadmap: RoadmapNode,
+};
+
+const edgeTypes = {
+  floating: FloatingEdge,
+  // button: ButtonEdge,
+};
+
+import { Button } from '@/components/ui/button';
 import {
   Drawer,
+  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
+  DrawerTrigger,
 } from '@/components/ui/drawer';
+import RoadmapNode from './_nodes/RoadmapNode';
 
-import { ReactFlow, Controls, Background } from '@xyflow/react';
-import '@xyflow/react/dist/style.css';
-
-const edges = [{ id: '1-2', source: '1', target: '2' }];
+const edges = [{ id: '1-2', source: '1', target: '2', animated: true }];
 
 const nodes = [
   {
     id: '1',
-    data: { label: 'Hello' },
+    type: 'roadmap',
+    data: {
+      color: '#8BFFAC',
+      title:
+        'Contact Joachim Schneider from OST about machine servicing optimisation',
+    },
     position: { x: 0, y: 0 },
-    type: 'input',
   },
   {
     id: '2',
-    type: "custom",
-    data: { label: 'World' },
-    position: { x: 0, y: 100 },
+    type: 'roadmap',
+    data: { color: '#FD84FF', title: 'You are a Problem' },
+    position: { x: 200, y: 0 },
   },
   {
-    id: '2',
-    data: { label: 'World' },
-    position: { x: 0, y: 150 },
-  },
-  {
-    id: '3',
-    data: { label: 'Moin' },
-    position: { x: -500, y: 100 },
+    id: `${3}`,
+    type: 'roadmap',
+    draggable: true,
+    selectable: false,
+    data: { color: '#FD84FF', title: 'Marketing' },
+    position: { x: 400, y: 0 },
   },
 ];
 
-
-
 export default function Roadmap() {
   const { roadmap, setRoadmap } = useStore();
-  
 
   return (
     <Drawer open={roadmap} onOpenChange={setRoadmap}>
-      <DrawerContent className='h-[70vh] overflow-hidden flex-col items-center justify-center'>
-        <div className='mx-auto w-full max-w-sm'>
+      <DrawerContent data-vaul-no-drag>
+        <div>
           <DrawerHeader>
-            <DrawerTitle>Your Innovation Roadmap</DrawerTitle>
-            <DrawerDescription>
-              Keep track of your progress and define new goals!
+            <DrawerTitle className='text-center w-full text-2xl'>
+              Innovation Roadmap
+            </DrawerTitle>
+            <DrawerDescription className='text-center w-full'>
+              Next proposed steps
             </DrawerDescription>
+            <DrawerClose asChild>
+              <button className='absolute top-4 right-4 rounded-full p-2 hover:bg-gray-200 hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-gray-400'>
+                <X className='h-5 w-5' />
+              </button>
+            </DrawerClose>
           </DrawerHeader>
-
-          <div
-            className='mx-auto w-full max-w-sm'
-            style={{ width: '100vw', height: '100vh' }}>
-            <ReactFlow nodes={nodes} edges={edges}>
-              <Background />
-              <Controls />
+          <div style={{ width: '100vw', height: '60vh' }} className='bottom-0'>
+            <ReactFlow
+              nodes={nodes}
+              edges={edges}
+              proOptions={{ hideAttribution: true }}
+              fitView>
+              {/* <Controls showInteractive={false} /> */}
+              <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
             </ReactFlow>
           </div>
-          {/* <div className='p-4 pb-0'>
-            <div className='flex items-center justify-center space-x-2'>
-              <Button
-                variant='outline'
-                size='icon'
-                className='h-8 w-8 shrink-0 rounded-full'
-                onClick={() => onClick(-10)}
-                disabled={goal <= 200}>
-                <Minus />
-                <span className='sr-only'>Decrease</span>
-              </Button>
-              <div className='flex-1 text-center'>
-                <div className='text-7xl font-bold tracking-tighter'>
-                  {goal}
-                </div>
-                <div className='text-[0.70rem] uppercase text-muted-foreground'>
-                  Calories/day
-                </div>
-              </div>
-              <Button
-                variant='outline'
-                size='icon'
-                className='h-8 w-8 shrink-0 rounded-full'
-                onClick={() => onClick(10)}
-                disabled={goal >= 400}>
-                <Plus />
-                <span className='sr-only'>Increase</span>
-              </Button>
-            </div>
-            <div className='mt-3 h-[120px]'></div>
-          </div> */}
-          <DrawerFooter>
-            {/* <Button>Submit</Button>
-            <DrawerClose asChild>
-              <Button variant='outline'>Cancel</Button>
-            </DrawerClose> */}
-          </DrawerFooter>
         </div>
       </DrawerContent>
     </Drawer>
   );
 }
-
-
-
