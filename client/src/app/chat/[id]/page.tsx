@@ -48,4 +48,4 @@ export default function Chat() {
   );
 }
 
-export const runtime = 'edge'
+export const runtime = 'edge';
