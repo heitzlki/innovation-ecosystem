@@ -154,6 +154,7 @@ export default function CardsChat() {
                   {
                     role: 'assistant',
                     content:
+                      //@ts-expect-error type error
                       data.response ||
                       "I'm sorry, I couldn't process your request.",
                   },
