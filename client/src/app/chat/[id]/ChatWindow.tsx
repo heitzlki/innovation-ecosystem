@@ -219,7 +219,7 @@ export default function CardsChat() {
             </Button>
           </form>
         </CardFooter>
-        <BorderBeam
+        {/* <BorderBeam
           duration={6}
           size={400}
           className={`from-transparent via-[color:${color1}] to-transparent`}
@@ -230,7 +230,7 @@ export default function CardsChat() {
           delay={3}
           size={400}
           className={`from-transparent via-[color:${color2}] to-transparent`}
-        />
+        /> */}
       </Card>
     </div>
   );

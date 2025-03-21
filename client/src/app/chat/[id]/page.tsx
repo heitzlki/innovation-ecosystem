@@ -5,10 +5,11 @@ import DockBar from './DockBar';
 import ChatWindow from './ChatWindow';
 import Graph from './Graph';
 import Roadmap from './Roadmap';
+import InfoWindow from './InfoWindow';
 
 import { useStore } from '@/lib/store';
 
-export default function Chat({ params }: { params: Promise<{ id: string }> }) {
+export default function Chat() {
   const [startData, setStartData] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { setGraphData } = useStore();
@@ -41,9 +42,10 @@ export default function Chat({ params }: { params: Promise<{ id: string }> }) {
   return (
     <div suppressHydrationWarning>
       <DockBar />
-      <ChatWindow startData={startData} />
-      <Graph startData={startData} />
+      <ChatWindow />
+      <Graph />
       <Roadmap />
+      <InfoWindow />
     </div>
   );
 }
