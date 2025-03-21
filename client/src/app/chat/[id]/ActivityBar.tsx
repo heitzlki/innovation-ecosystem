@@ -2,9 +2,7 @@
 import { X } from "lucide-react"
 import { useStore } from '@/lib/store';
 import * as React from "react"
-import { Minus, Plus } from "lucide-react"
-import { Bar, BarChart, ResponsiveContainer } from "recharts"
-import { ReactFlow, Controls, Background } from '@xyflow/react';
+import { ReactFlow, Controls } from '@xyflow/react';
 
 import AnnotationNode from './_nodes/AnnotationNode';
 import InfoNode from './_nodes/InfoNode';
@@ -38,33 +36,33 @@ import {
 const edges = [{ id: '1-2', source: '1', target: '2' }];
 
 const nodes = [
-    {
-      id: '1',
-      type: 'custom',
-      data: { color: '#8BFFAC', title: 'Contact Joachim Schneider from OST about machine servicing optimisation' },
-      position: { x: 50, y: 100 }
-    },
-    {
-      id: '2',
-      data: { color: '#FD84FF', title: 'Your Problem' },
-      position: { x: 100, y: 200 },
-    },
-    {
-        id: `${3}`,
-        type: 'custom',
-        draggable: true,
-        selectable: false,
-        data: { color: '#FD84FF', title: 'Marketing' },
-        position: { x:100, y:200 },
-    },
-  ];
+  {
+    id: '1',
+    type: 'custom',
+    data: { color: '#8BFFAC', title: 'Contact Joachim Schneider from OST about machine servicing optimisation' },
+    position: { x: 50, y: 100 }
+  },
+  {
+    id: '2',
+    data: { color: '#FD84FF', title: 'Your Problem' },
+    position: { x: 100, y: 200 },
+  },
+  {
+    id: `${3}`,
+    type: 'custom',
+    draggable: true,
+    selectable: false,
+    data: { color: '#FD84FF', title: 'Marketing' },
+    position: { x: 100, y: 200 },
+  },
+];
 
 
 
 
 export function DrawerDemo() {
-    const { roadmap, setRoadmap } = useStore();
-    const [goal, setGoal] = React.useState(350)
+  const { roadmap, setRoadmap } = useStore();
+  const [goal, setGoal] = React.useState(350)
 
   function onClick(adjustment: number) {
     setGoal(Math.max(200, Math.min(400, goal + adjustment)))
