@@ -31,6 +31,9 @@ export default function Chat() {
     setIsLoading(false);
   }, []);
 
+  // Get the graphData from the store to pass to Graph and ChatWindow
+  const { graphData } = useStore();
+
   if (isLoading) {
     return (
       <div className='flex items-center justify-center min-h-screen'>
@@ -38,6 +41,8 @@ export default function Chat() {
       </div>
     );
   }
+
+
 
   return (
     <div suppressHydrationWarning>
