@@ -142,7 +142,7 @@ export const useEdgeParams = () => {
       nodes.push({
         id: 'target',
         type: 'center',
-        data: { color: '#000', title: 'Your Problem' },
+        data: { color: '#000', title: 'Innovation Potential' },
         position: center,
       });
       // first layer

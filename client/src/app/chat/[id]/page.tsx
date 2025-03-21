@@ -5,8 +5,6 @@ import DockBar from './DockBar';
 import ChatWindow from './ChatWindow';
 import Graph from './Graph';
 import Roadmap from './Roadmap';
-import { DrawerDemo } from './ActivityBar';
-import { Drawer } from 'vaul';
 import InfoWindow from './InfoWindow';
 
 import { useStore } from '@/lib/store';
@@ -44,8 +42,10 @@ export default function Chat() {
       <DockBar />
       <ChatWindow />
       <Graph />
-      <DrawerDemo />
+      <Roadmap />
       <InfoWindow />
     </div>
   );
 }
+
+export const runtime = 'edge'
