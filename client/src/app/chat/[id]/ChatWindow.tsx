@@ -77,7 +77,7 @@ export default function CardsChat() {
   // </div>
   return (
     <div className='fixed top-1/2 right-0 transform -translate-y-1/2 z-50 px-4 py-14'>
-      <Card className='relative w-[350px] overflow-hidden h-full'>
+      <Card className='relative w-[350px] overflow-hidden h-full 2xl:w-[500px]'>
         {/* <CardHeader className='flex flex-row items-center'>
           <div className='flex items-center space-x-4'>
             <Avatar>
@@ -106,7 +106,13 @@ export default function CardsChat() {
           </TooltipProvider>
         </CardHeader> */}
         <CardContent>
-          <div className='space-y-4 h-[80vh]'>
+            <div
+            className='space-y-4 h-[80vh] overflow-y-auto no-scrollbar'
+            ref={(el) => {
+              if (el) {
+              el.scrollTop = el.scrollHeight;
+              }
+            }}>
             {messages.map((message, index) => (
               <div
                 key={index}
