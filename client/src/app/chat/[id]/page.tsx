@@ -5,6 +5,8 @@ import DockBar from './DockBar';
 import ChatWindow from './ChatWindow';
 import Graph from './Graph';
 import Roadmap from './Roadmap';
+import { DrawerDemo } from './ActivityBar';
+import { Drawer } from 'vaul';
 
 export default function Chat({ params }: { params: Promise<{ id: string }> }) {
   const [startData, setStartData] = useState<any>(null);
@@ -39,7 +41,7 @@ export default function Chat({ params }: { params: Promise<{ id: string }> }) {
       <DockBar />
       <ChatWindow startData={startData} />
       <Graph startData={startData} />
-      <Roadmap />
+      <DrawerDemo />
     </div>
   );
 }

@@ -30,13 +30,22 @@ const nodes = [
   },
   {
     id: '2',
+    type: "custom",
     data: { label: 'World' },
     position: { x: 100, y: 100 },
   },
+  {
+    id: '3',
+    data: { label: 'Moin' },
+    position: { x: -500, y: 100 },
+  },
 ];
+
+
 
 export default function Roadmap() {
   const { roadmap, setRoadmap } = useStore();
+  
 
   return (
     <Drawer open={roadmap} onOpenChange={setRoadmap}>
@@ -99,3 +108,6 @@ export default function Roadmap() {
     </Drawer>
   );
 }
+
+
+
