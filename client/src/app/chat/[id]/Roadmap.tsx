@@ -101,11 +101,6 @@ export default function Roadmap() {
               <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
             </ReactFlow>
           </div>
-          <div className='p-4 pb-0'>
-            <div className='flex items-center justify-center space-x-2'></div>
-            <div className='mt-3 h-[120px]'></div>
-          </div>
-          <DrawerFooter></DrawerFooter>
         </div>
       </DrawerContent>
     </Drawer>
