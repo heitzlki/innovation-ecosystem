@@ -24,6 +24,8 @@ Watch our project in action and see how the AI-powered Innovation Coach works in
 
 [Watch on YouTube](https://youtu.be/ljvFArdf-VY)
 
+[![Watch on YouTube](http://img.youtube.com/vi/ljvFArdf-VY/0.jpg)](https://youtu.be/ljvFArdf-VY 'Video Title')
+
 ## Screenshots
 
 ### Full Application View
