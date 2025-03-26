@@ -51,7 +51,14 @@ function CenterNode({
   top-auto
   bottom-auto'
       />
-      {/* <BorderBeam duration={3} size={50} colorFrom={color1} colorTo={color2} /> */}
+      {isHovered && (
+        <BorderBeam
+          duration={4}
+          size={40}
+          colorFrom={color1}
+          colorTo={color2}
+        />
+      )}
     </div>
   );
 }
