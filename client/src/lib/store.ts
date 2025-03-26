@@ -31,8 +31,8 @@ interface ClientState {
 
 export const useStore = create<ClientState>((set) => ({
   roadmap: false,
-  color1: 'hsl(186,100%,50%)',
-  color2: 'hsl(156,100%,50%)',
+  color1: 'hsl(313.2,100%,50%)',
+  color2: 'hsl(122.4,100%,58.5%)',
   graphData: [],
   selectedNode: null,
   setColor1: (color: string) => set({ color1: color }),
