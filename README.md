@@ -1,28 +1,56 @@
 # Innovation Ecosystem
 
-## Logo
+<p align="center">
+  <img src="https://raw.githubusercontent.com/heitzlki/innovation-ecosystem/refs/heads/main/docs/logo.svg" alt="Innovation Ecosystem Logo" height="50px">
+</p>
 
-![Innovation Ecosystem Logo](https://github.com/your-repo/logo.svg)
+Innovation is not a one-size-fits-all process. The **Innovation Ecosystem** project was developed during **[START Hack 2025](https://www.startglobal.org)** to provide an **AI-powered Innovation Coach** that guides users through a personalized innovation journey. By tailoring recommendations to individual user personas, our platform ensures engagement, motivation, and relevant next steps to help businesses and entrepreneurs navigate the complexities of innovation effectively.
+
+## Table of Contents
+
+- [Video Demonstration](#video-demonstration)
+- [Screenshots](#screenshots)
+- [Draft](#draft)
+- [Figma Design](#figma-design)
+- [Team Members](#team-members)
+- [Problem Statement](#problem-statement)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
+- [Acknowledgments](#acknowledgments)
 
 ## Video Demonstration
 
-[Watch on YouTube](link_to_youtube_video)
+Watch our project in action and see how the AI-powered Innovation Coach works in real-time:
 
-https://www.linkedin.com/posts/kirill-heitzler_starchack-teamwork-innovation-activity-7309187353644838912-2WTK?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEVRAHEB8Zvq4xLm094HpJh7xdaPo2ebniY linked in post
+[Watch on YouTube](https://youtu.be/ljvFArdf-VY)
 
 ## Screenshots
 
-(Add project screenshots here to showcase UI and functionality)
+### Full Application View
+
+This screenshot showcases the main interface of our **Innovation Ecosystem** platform, highlighting its clean UI and intuitive navigation.
+![Full Application](https://raw.githubusercontent.com/heitzlki/innovation-ecosystem/refs/heads/main/docs/full.png)
+
+### Roadmap Feature
+
+An example of how the AI-driven innovation roadmap guides users through their personalized innovation journey.
+![Roadmap](https://raw.githubusercontent.com/heitzlki/innovation-ecosystem/refs/heads/main/docs/roadmap.png)
 
 ## Draft
 
-![Draft Image](link_to_draft_image)
+Our initial wireframe sketch illustrating the early concept and structure of the platform.
+![Draft Image](https://raw.githubusercontent.com/heitzlki/innovation-ecosystem/refs/heads/main/docs/draft.JPG)
 
 ## Figma Design
 
-[View the Figma Design](link_to_figma_design)
+We used **Figma** to design our user interface, ensuring a seamless and engaging experience.
+
+![View Figma Design - Screen 1](https://raw.githubusercontent.com/heitzlki/innovation-ecosystem/refs/heads/main/docs/figma1.png)
+![View Figma Design - Screen 2](https://raw.githubusercontent.com/heitzlki/innovation-ecosystem/refs/heads/main/docs/figma2.png)
 
 ## Team Members
+
+Meet the amazing team behind **Innovation Ecosystem**:
 
 - **Noah Gerber**
 
@@ -38,13 +66,9 @@ https://www.linkedin.com/posts/kirill-heitzler_starchack-teamwork-innovation-act
   - [LinkedIn](https://www.linkedin.com/in/lukas-diebold/)
   - [GitHub](https://github.com/lukasdiebold)
 
-## Overview
-
-Innovation is not a one-size-fits-all process. Our solution, **Innovation Ecosystem**, provides an AI-powered Innovation Coach to guide users through a personalized innovation journey. By tailoring recommendations to individual user personas, our platform ensures engagement, motivation, and relevant next steps to help SMEs in the Canton of St.Gallen innovate effectively.
-
 ## Problem Statement
 
-https://github.com/START-Hack/Kanton-St.Gallen-STARTHACK25
+[Hackathon Challenge Repository](https://github.com/START-Hack/Kanton-St.Gallen-STARTHACK25)
 
 Existing digital solutions fail to provide personalized guidance for innovation. Users often feel lost, unsupported, and eventually disengage due to the lack of tailored assistance. The **Innovation Ecosystem** addresses this issue by offering:
 
@@ -91,4 +115,4 @@ python ./app/app.py
 
 ## Acknowledgments
 
-Special thanks to the **Economic Promotion Office of the Canton of St.Gallen** for providing the challenge and resources to make this project possible.
+Special thanks to the **Canton of St.Gallen** for providing the challenge and resources to make this project possible.
