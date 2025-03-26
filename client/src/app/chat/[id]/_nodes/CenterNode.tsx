@@ -34,22 +34,14 @@ function CenterNode({
         </div>
       </div>
       <Handle
-        type='target'
+        type='source'
         position={Position.Top}
-        className='opacity-0
-  height-0
-  width-0
-  top-auto
-  bottom-auto'
+        className='opacity-0 height-0 width-0 top-auto bottom-auto'
       />
       <Handle
-        type='source'
+        type='target'
         position={Position.Bottom}
-        className='opacity-0
-  height-0
-  width-0
-  top-auto
-  bottom-auto'
+        className='opacity-0 height-0 width-0 top-auto bottom-auto'
       />
       {isHovered && (
         <BorderBeam

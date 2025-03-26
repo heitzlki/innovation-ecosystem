@@ -41,10 +41,11 @@ function InfoNode({
         className='opacity-0 height-0 width-0 top-auto bottom-auto'
       />
       <Handle
-        type='source'
+        type='target'
         position={Position.Bottom}
         className='opacity-0 height-0 width-0 top-auto bottom-auto'
       />
+
       {/* <BorderBeam duration={4} size={20} colorFrom=''/> */}
     </div>
   );
