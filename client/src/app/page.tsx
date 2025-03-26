@@ -97,8 +97,6 @@ export default function Start() {
     // Set colors
     setColor1(color1);
     setColor2(color2);
-
-    console.log(color1, color2);
   };
 
   const [isLoading, setIsLoading] = useState(false);
