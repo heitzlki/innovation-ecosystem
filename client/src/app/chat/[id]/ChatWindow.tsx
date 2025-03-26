@@ -26,18 +26,19 @@ export default function CardsChat() {
         role: 'assistant',
         content: 'Hi, how can I help you today?',
       },
+      {
+        role: 'user',
+        content: 'Tell me more about automation',
+      },
+      {
+        role: 'assistant',
+        content:
+          'Sure. Automation, rated highly for innovation, focuses on streamlining processes. It includes experts like Samuel Schneider from the Canton of St. Gallen and Leon Zimmermann from St.Gallen Robotics Institute, who specialize in sensor technologies and automation.',
+      },
     ];
 
     if (graphData) {
-      const welcomeMessage = `Welcome, I'm your personal Innovation Assistant. In the middle you can see possible areas of inovation relate
-      to your problems. Feel free to explore the graph. Once your ready, we can get started developing a roadmap towards more innovation.`;
-
-      return [
-        {
-          role: 'assistant',
-          content: welcomeMessage,
-        },
-      ];
+      return defaultMessages;
     }
 
     return defaultMessages;

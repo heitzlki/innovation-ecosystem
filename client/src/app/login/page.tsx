@@ -60,7 +60,7 @@ export default function Login() {
       const tokenData = await fetchToken(data.username, data.password);
       localStorage.setItem('token', tokenData.access_token);
       login();
-      router.push('/chat/ey38he3udh3iuye29w');
+      router.push('/chat/demo');
     } catch (error) {
       if (error instanceof Error) {
         setError(error.message);

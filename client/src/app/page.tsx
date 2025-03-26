@@ -51,8 +51,8 @@ export default function Start() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      role: '',
-      problem: '',
+      role: 'I am the CEO of a metal processing company',
+      problem: 'I find it hard to implement new technology in my company',
       confidence: 5,
       clue: 5,
       motivation: 5,
@@ -60,7 +60,7 @@ export default function Start() {
     },
   });
 
-  const [colorSlider, setColorSlider] = useState<number[]>([50, 50, 50]);
+  const [colorSlider, setColorSlider] = useState<number[]>([87, 34, 67]);
 
   const { color1, color2, setColor1, setColor2 } = useStore();
 
@@ -153,15 +153,127 @@ export default function Start() {
       };
 
       // Store response data in localStorage to access it on the next page
-      localStorage.setItem('startData', JSON.stringify(fullData));
+      localStorage.setItem(
+        'startData',
+        JSON.stringify({
+          '0': {
+            area: {
+              name: 'Technology Management',
+              rating: 85,
+              contacts: [
+                {
+                  name: 'Jakob Petersen',
+                  description:
+                    'Research and teaching in Technology Management, Medical Technology, Digitalization, with a special emphasis on Technology Management.',
+                  institution:
+                    'Eastern Switzerland University of Applied Sciences - Technology Department',
+                  email: 'jakob.petersen@unisg.ch',
+                  website: 'https://www.unisg.ch',
+                },
+                {
+                  name: 'Sophie Dufour',
+                  description:
+                    'Research group focused on Technology Management, also exploring Medical Technology, Digitalization.',
+                  institution:
+                    'Canton of St. Gallen - Economic Development Office',
+                  email: 'sdufour@canton.ch',
+                  website: 'https://www.canton.ch',
+                },
+                {
+                  name: 'Rafael Silva',
+                  description:
+                    'Research and teaching in HR Management, Business Growth, Technology Management, Supply Chain Management, with a special emphasis on HR Management.',
+                  institution: 'St.Gallen Center for Digital Transformation',
+                  email: 'r.silva@st.gallen.ch',
+                  website: 'https://www.st.gallen.ch',
+                },
+              ],
+            },
+          },
+          '1': {
+            area: {
+              name: 'Automation',
+              rating: 85,
+              contacts: [
+                {
+                  name: 'Samuel Schneider',
+                  description:
+                    'Research and teaching in Sensor Technologies, Climate Protection, Automation, with a special emphasis on Sensor Technologies.',
+                  institution:
+                    'Canton of St. Gallen - Economic Development Office',
+                  email: 'schneider.s@canton.ch',
+                  website: 'https://www.canton.ch',
+                },
+                {
+                  name: 'Leon Zimmermann',
+                  description:
+                    'Specializing in Sensor Technologies with complementary work in Climate Protection, Automation.',
+                  institution: 'St.Gallen Robotics Institute',
+                  email: 'leon.zimmermann@stgallen.ch',
+                  website: 'https://www.st.gallen.ch',
+                },
+                {
+                  name: 'Julia Maurer',
+                  description:
+                    'Developing solutions in Neurological Disorders while conducting research on Automation, Business Strategy, Energy Storage.',
+                  institution:
+                    'University of St.Gallen - Center for Financial Studies',
+                  email: 'julia.maurer@unisg.ch',
+                  website: 'https://www.unisg.ch',
+                },
+              ],
+            },
+          },
+          '2': {
+            area: {
+              name: 'Technology Development',
+              rating: 85,
+              contacts: [
+                {
+                  name: 'Rafael Silva',
+                  description:
+                    'Research and teaching in Transdisciplinary Research, Organizational Development, Technology Development, Translational Research, with a special emphasis on Transdisciplinary Research.',
+                  institution: 'St.Gallen Institute for Digital Ethics',
+                  email: 'rsilva@stgallen.ch',
+                  website: 'https://www.st.gallen.ch',
+                },
+                {
+                  name: 'Leo Hoffmann',
+                  description:
+                    'Research and teaching in Transdisciplinary Research, Organizational Development, Technology Development, Translational Research, with a special emphasis on Transdisciplinary Research.',
+                  institution:
+                    'University of St.Gallen - Center for Leadership Studies',
+                  email: 'lhoffmann@unisg.ch',
+                  website: 'https://www.unisg.ch',
+                },
+                {
+                  name: 'Fabian Huber',
+                  description:
+                    'Studies and innovations in Sustainability, Technology Development, with primary emphasis on applications in Sustainability.',
+                  institution: 'Nestlé Food Science Institute',
+                  email: 'huber.f@nestlfoo.ch',
+                  website: 'https://www.nestlé.ch',
+                },
+              ],
+            },
+          },
+          role: 'I am the CEO of a metal processing company',
+          problem: 'I find it hard to implement new technology in my company',
+          confidence: 67,
+          clue: 87,
+          motivation: 34,
+        })
+      );
 
       // Navigate to next page
-      router.push('/chat/ey38he3udh3iuye29w');
+      router.push('/chat/demo');
     } catch (error) {
       console.error('Error:', error);
       toast('Error submitting your data', {
         description: 'Please try again later.',
       });
+      // Demo mode
+      router.push('/chat/demo');
     } finally {
       setIsLoading(false);
     }
