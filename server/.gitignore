@@ -1,0 +1,5 @@
+python_scripts/data_upload_with_keys.py
+*__pycache__*
+*.DS_Store
+node_modules/
+venv/
